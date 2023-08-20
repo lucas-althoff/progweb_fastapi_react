@@ -4,3 +4,21 @@ Um projeto de servidor fullstack minimalista, para ser utilizado em cursos bási
 ## Tecnologias 
 Servidor Back-end: Python com o Framework FastAPI
 Servidor Front-end: Javascript com os frameworks Reactjs e Bootstrap
+
+## Configurando o servidor Back-end
+
+Após instalar o Python em versão acima da 3.7 executar:
+
+$ pip install fastapi
+$ pip install uvicorn
+
+Para subir o servidor base você tem duas opções, rodando o interpretador no arquivo python:
+- $ python backend/app_v1_uvicorn.py
+
+Chamando o servidor uvicorn para implantar o objeto app:
+- $ cd backend 
+- $ uvicorn app_v1:app --reload
+
+O backend em sua versão de treinamento será incluido na pasta app_v1.
+
+## Configurando o servidor Front-end
