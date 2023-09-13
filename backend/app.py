@@ -1,9 +1,8 @@
 from fastapi import FastAPI
-from backend.app_v1.rotas_api import rotas
+from rotas.rotas_api import rotas
 import uvicorn
 
 app = FastAPI()
-
 
 @app.on_event('startup')
 def __startup():
@@ -19,7 +18,6 @@ def __shutdown():
     O que fazer quando a API é encerrada
     """
     print(f'Encerrando - {"A API de HTTP"}')
-
 
 app.include_router(rotas)
     

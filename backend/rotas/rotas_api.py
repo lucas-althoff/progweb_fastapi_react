@@ -3,13 +3,26 @@ from fastapi import APIRouter
 rotas = APIRouter()
 
 @rotas.get('/')
-async def home():
+def home():
     return {'message': 'Ola Mundo'}
 
 @rotas.get('/dados')
-async def dados() -> dict:
+def dados():
+    return {'conteudo': 'Um tomate pequeno.'}
 
-    exemplo = {'usuario': 'Cícera',
-               'livro': 'O Pequeno Príncipe'}
+@rotas.get('/pokemon')
+def pokemon():
+    p = "pikachu"
+    s = str([p,p])
+    return {'conteudo': s}
 
-    return exemplo
+@rotas.get('/pokemon/arquivo')
+def poke_arq():
+    import os
+    import json
+    fpath = os.getcwd()
+    path = fpath + r'\utils\dados.json'
+    with open(path,'r') as f:
+        pokemons = json.load(f)
+    print(pokemons, type(pokemons))
+    return pokemons
