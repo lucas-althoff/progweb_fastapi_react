@@ -2,6 +2,20 @@ from fastapi import APIRouter
 
 rotas = APIRouter()
 
+def arquivo_pokemon(pokemon=None, acao='leitura'):
+    import os
+    import json
+    fpath = os.getcwd()
+    path = fpath + r'\utils\dados.json'
+    if acao=='leitura':
+        with open(path,'r') as f:
+            pokemons = json.load(f)
+        return pokemons
+    else:
+        pokemons = arquivo_pokemon(acao='leitura')
+        pokemons.append(pokemon)
+        return pokemons
+
 @rotas.get('/')
 def home():
     return {'message': 'Ola Mundo'}
@@ -17,12 +31,12 @@ def pokemon():
     return {'conteudo': s}
 
 @rotas.get('/pokemon/arquivo')
-def poke_arq():
-    import os
-    import json
-    fpath = os.getcwd()
-    path = fpath + r'\utils\dados.json'
-    with open(path,'r') as f:
-        pokemons = json.load(f)
+def leitura_pokemon():
+    pokemons = arquivo_pokemon(acao='leitura')
     print(pokemons, type(pokemons))
     return pokemons
+
+@rotas.post('/pokemon')
+def atualizacao_pokemon(entrada):
+    ...
+    
