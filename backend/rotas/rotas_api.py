@@ -2,19 +2,22 @@ from fastapi import APIRouter
 
 rotas = APIRouter()
 
-def arquivo_pokemon(pokemon=None, acao='leitura'):
-    import os
+def manipulacao_arq_json(fpath, acao='leitura'):
     import json
-    fpath = os.getcwd()
-    path = fpath + r'\utils\dados.json'
-    if acao=='leitura':
-        with open(path,'r') as f:
-            pokemons = json.load(f)
-        return pokemons
+    if acao == 'leitura':
+        with open(fpath,'r') as f:
+            resultado = f.read()
+        resultado = json.loads(resultado)
+        return resultado
     else:
-        pokemons = arquivo_pokemon(acao='leitura')
-        pokemons.append(pokemon)
-        return pokemons
+        ...
+
+def coletar_caminho():
+    import os
+    root_path = os.getcwd()
+    fpath = r'\progweb_fastapi_react\backend\utils\dados.json'
+    path = root_path + fpath
+    return path
 
 @rotas.get('/')
 def home():
@@ -32,11 +35,16 @@ def pokemon():
 
 @rotas.get('/pokemon/arquivo')
 def leitura_pokemon():
-    pokemons = arquivo_pokemon(acao='leitura')
-    print(pokemons, type(pokemons))
-    return pokemons
+    caminho_arq_json = coletar_caminho()
+    resultado = manipulacao_arq_json(fpath=caminho_arq_json, acao='leitura')
+    print("RESULTADO: ", resultado, type(resultado))
+    return resultado
 
 @rotas.post('/pokemon')
-def atualizacao_pokemon(entrada):
+def atualizacao_pokemon():
+    # Receber novo pokemon
+    # Abrir arquivo
+    # Incluir pokemon
+    # Salvar novo arquivo
+    # Devolver lista de pokemons atualizada
     ...
-    

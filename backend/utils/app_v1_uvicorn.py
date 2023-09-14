@@ -15,6 +15,7 @@ def dados():
 def pokemon():
     p = "pikachu"
     s = str([p,p])
+    print(s)
     return {'conteudo': s}
     
 if __name__ == '__main__':
