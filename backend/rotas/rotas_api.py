@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 rotas = APIRouter()
 
@@ -26,7 +26,7 @@ def home():
     return {'message': 'Ola Mundo'}
 
 @rotas.get('/pikachu', tags=['Consultas'], name='Leitura de Pikachus', description='Dicionário contendo pikachus, devolve dois pikachus.')
-def pokemon(numero):
+def pokemon(numero=10):
     p = "pikachu"
     lista = []
     for i in range(int(numero)):
@@ -42,14 +42,18 @@ def pokemon(numero):
 #     return resultado
 
 class Pokemon(BaseModel):
-    nome: str
+    nome: str = "Pikachu"
     habilidade: Optional[str]
-    idade: int
-    exp: int
-    vida: int
-    forca: int   
+    idade: int = 10
+    exp: int = 0
+    vida: int = 10
+    forca: int = 5
 
-@rotas.post('/pokemon', tags=['Inserções'], name='Incluir Pokemons', description='Receber objeto Pokemon e guardar no arquivo.')
+class Pokemons(BaseModel):
+    Lista: List[Pokemon]
+    
+        
+@rotas.post('/pokemon', tags=['Inserções'], name='Incluir Pokemon', description='Receber objeto Pokemon e guardar no arquivo.')
 def atualizacao_pokemon(entrada: Pokemon):
     # Receber novo pokemon [ok]
     # Abrir arquivo 
@@ -57,4 +61,8 @@ def atualizacao_pokemon(entrada: Pokemon):
     # Salvar novo arquivo
     # Devolver lista de pokemons atualizada
     print(entrada, type(entrada))
+    return entrada
+
+@rotas.post('/pokemons', tags=['Inserções'], name='Incluir múltiplos Pokemons', description='Receber objeto Pokemon e guardar no arquivo.')
+def atualizacao_pokemon(entrada: Pokemons):
     return entrada
