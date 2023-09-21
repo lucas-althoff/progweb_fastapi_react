@@ -6,7 +6,7 @@ function App() {
     
     useEffect( () => {
         axios
-            .get("http://localhost:7777/get_data")
+            .get("http://localhost:7777/home")
             .then((response) => {
                 const data = response.data
                 setBody(data['body'])
