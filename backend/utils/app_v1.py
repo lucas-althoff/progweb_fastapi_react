@@ -5,37 +5,12 @@ import uvicorn
 # Instanciando aplicação
 servidor = FastAPI()
 
-# Definindo rotas
-@servidor.get("/", include_in_schema=False)
-def home():
-    html = """
-            <!DOCTYPE html>
-            <html lang="pt-br">
-            <head>
-                <link rel="shortcut icon" href="favicon.ico">
-                <title>Biblioteca de Pokemons</title>
-            </head>
-            <body>
-                <div class="header"> 
-                    <div class="inner-header flex">
-                        <div class="logo-container">
-                            <img src="/static/logo2.png" alt="OCA" class="logo">
-                        </div>
-                        <h1>Biblioteca de Pokemons API</h1>
-            
-                    </div>
-                    <h2>Seja bem vindo a API de comunicação com a PokeAPI. <br>
-                        Esse sistema tem o objetivo de facilitar a manipulação de dados relacionados a uma biblioteca de pokemons.<br>
-                        Para maiores informacoes visite: /docs 
-                    </h2> 
-                </div>
-                    <div class="content flex">
-                    <p>@CEUB 2023. </p>
-                </div>
-            </body>
-            </html>
-            """
-    return HTMLResponse(html)
+@servidor.get("/")
+def raiz():
+    return HTMLResponse("""<html>
+                Olá Mundo <br>
+                Programação para Web
+                </html>""")
 
 @servidor.get("/pessoas")
 def pessoas(nome: str, idade: int):

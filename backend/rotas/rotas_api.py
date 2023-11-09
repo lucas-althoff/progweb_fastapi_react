@@ -15,10 +15,10 @@ def manipulacao_arq_json(fpath, acao='leitura'):
     else:
         ...
 
-def coletar_caminho():
+def coletar_caminho(file_name):
     import os
     root_path = os.getcwd()
-    fpath = r'\progweb_fastapi_react\backend\utils\dados.json'
+    fpath = f'\\database\\{file_name}'
     path = root_path + fpath
     return path
 
@@ -91,12 +91,22 @@ class Pokemons(BaseModel):
             description='Receber objeto Pokemon e guardar no arquivo.')
 def atualizacao_pokemon(entrada: Pokemon):
     # Receber novo pokemon [ok]
-    # Abrir arquivo 
-    # Incluir pokemon
-    # Salvar novo arquivo
+    # Abrir arquivo [ok]
+    # Incluir pokemon [ok]
+    # Salvar novo arquivo [ok]
+    # Formatar pokemon como json
     # Devolver lista de pokemons atualizada
-    print(entrada, type(entrada))
-    return entrada
+    import json
+    
+    path = coletar_caminho("lista_pokemon.txt")
+    
+    entrada_fmt = str(entrada).split(' ')
+    entrada_fmt = json.dumps(entrada_fmt)
+    arq = open(path,'a')
+    arq.write(str(entrada_fmt)+'\n')
+    arq.close()
+    print(entrada_fmt, type(entrada_fmt))
+    return entrada_fmt
 
 @rotas.post('/pokemons', tags=['Inserções'],
             name='Incluir múltiplos Pokemons',

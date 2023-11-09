@@ -1,0 +1,1 @@
+["nome='Pikachu'", "habilidade=''", 'idade=10', 'exp=0', 'vida=76', 'forca=14']
