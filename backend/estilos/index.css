@@ -1,0 +1,19 @@
+h1 {
+    color: rgb(223, 24, 24);
+    text-align: center;
+}
+
+h2 {
+    color: rgb(27, 24, 223);
+    text-align: center;
+}
+
+p {
+    color: rgb(131, 128, 128);
+    text-align: center;
+}
+
+.imagem {
+    display: flex;
+    justify-content: center;
+}

@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import Optional, List
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 rotas = APIRouter()
 
@@ -22,33 +23,35 @@ def coletar_caminho(file_name):
     path = root_path + fpath
     return path
 
-@rotas.get('/', include_in_schema=False)
+@rotas.get('/', include_in_schema=True)
 def home():
-    html = """
-            <!DOCTYPE html>
+    nome = 'pikachu'
+    
+    html = f"""
             <html lang="pt-br">
-            <head>
-                <link rel="shortcut icon" href="favicon.ico">
-                <title>Biblioteca de Pokemons</title>
-            </head>
-            <body>
-                <div class="header"> 
-                    <div class="inner-header flex">
-                        <div class="logo-container">
-                            <img src="/static/logo2.png" alt="OCA" class="logo">
+                <head>
+                    <link href="estilos/index.css" rel="stylesheet">
+                    <title>API Pokemons</title>
+                </head>
+                <body>
+                    <div>
+                        <div class='imagem'>
+                            <img src="imagens/logo_pokemons.jpg">
                         </div>
-                        <h1>Biblioteca de Pokemons API</h1>
-            
+                        <h1>Biblioteca de {nome}</h1>
                     </div>
-                    <h2>Seja bem vindo a API de comunicação com a PokeAPI. <br>
-                        Esse sistema tem o objetivo de facilitar a manipulação de dados relacionados a uma biblioteca de pokemons.<br>
-                        Para maiores informacoes visite: /docs 
-                    </h2> 
-                </div>
-                    <div class="content flex">
-                    <p>@CEUB 2023. </p>
-                </div>
-            </body>
+                    <form action="" onsubmit="sendMessage(event)">
+                        <input type="text" id="TextoPadrao" autocomplete="off"/>
+                        <button>Enviar</button>
+                    </form>
+                    <div>
+                        <h2>Seja bem vindo a API de comunicação com a PokeAPI. <br>
+                            Esse sistema tem o objetivo de facilitar a manipulação de dados relacionados a uma biblioteca de pokemons.<br>
+                            Para maiores informacoes visite: /docs 
+                        </h2> 
+                        <p> @CEUB 2023. </p>
+                    </div>
+                </body>
             </html>
             """
     return HTMLResponse(html)

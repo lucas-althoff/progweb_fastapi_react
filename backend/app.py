@@ -2,6 +2,7 @@ from datetime import datetime
 from fastapi import FastAPI
 from rotas.rotas_api import rotas
 import uvicorn
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Pokedex API",
                 description="Aplicação para curso básico de FastAPI",
@@ -33,6 +34,9 @@ def __shutdown():
     """
     print(f'[SERVIDOR POKEMON] [{datetime.now()}] Encerrando - {"A API de HTTP"}')
 
+app.mount("/imagens", StaticFiles(directory="imagens"), name='imagens')
+app.mount("/templates", StaticFiles(directory="templates"), name='templates')
+app.mount("/estilos", StaticFiles(directory="estilos"), name='estilos')
 app.include_router(rotas)
     
 if __name__ == '__main__':
